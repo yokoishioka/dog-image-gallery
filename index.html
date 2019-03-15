@@ -1,1 +1,37 @@
-<!-- Put your final HTML here -->
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Asana | San Francisco Pet Adoption Agency</title>
+<link rel="stylesheet" type="text/css" href="assets/styles/site.css">
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script>
+$(document).ready(function(){
+	var items = [];
+	var str = '';
+	
+    $.getJSON( "assets/data/dogs.json", function( data ) {
+		$.each( data.dogs, function( key, val ) {
+			items.push("<img class='dog-image' src='/dog-image-gallery/" + val.image + "'>");
+		});
+		for (i = 0; i < items.length; i++) {
+			str = str + items[i];
+		
+		}
+		$('.dog-gallery').html(str);
+	});	
+});
+</script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="dog-gallery">
+		</div>
+	</div>
+  
+</body>
+</html>
