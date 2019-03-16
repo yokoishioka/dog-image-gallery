@@ -42,17 +42,23 @@ a:hover {
   font-family: var(--font-serif);
   text-align: center;
 }
+.container {
+  width:50%;
+  margin:2.0em auto;
+}
 .dog-gallery{
   display:flex;
   flex-wrap:wrap;
-
+ 
 }
 .dog-image {
-  width:60%;
+  width:100%;
+  margin:1.0em;
 }
 .dog-gallery-navigation {
-  margin:1.0em;
-  max-width:33%;
+
+margin: 0 auto;
+
 
 }
 .dog-gallery-navigation a.previous-dog-image {
@@ -60,6 +66,7 @@ a:hover {
 }
 .dog-gallery-navigation a.next-dog-image{
  float:right;
+ margin-left:2.0em;
 }
 .dog-gallery-navigation a i{
   display:block;

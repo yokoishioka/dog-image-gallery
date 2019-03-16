@@ -13,17 +13,47 @@
 $(document).ready(function(){
 	var items = [];
 	var str = '';
+	var thisIndex = 0;
+	var galleryLength;
 	
     $.getJSON( "assets/data/dogs.json", function( data ) {
 		$.each( data.dogs, function( key, val ) {
 			items.push("<div class='dog-image'><img class='dog-image' src='/dog-image-gallery/" + val.image + "' alt='asana: san francisco pet adoption agency'></div>");
 		});
+		str = items[thisIndex];
+		/*
 		for (i = 0; i < items.length; i++) {
 			str = str + items[i];
 		
 		}
+		*/
 		$('.dog-gallery').html(str);
+		galleryLength = items.length;
+		
 	});	
+	$('a.previous-dog-image').click(function(){
+		
+		if (thisIndex == 1) { 
+			thisIndex--;
+			str = items[thisIndex];
+			$('.dog-gallery').html(str);
+			
+		}
+		else {
+			$(this).css("opacity", "0.5");
+		}
+	});
+	$('a.next-dog-image').click(function(){
+		
+		if (thisIndex < galleryLength - 1) { 
+			thisIndex++;
+			str = items[thisIndex];
+			$('.dog-gallery').html(str);
+		}
+		else {
+			$(this).css("opacity", "0.5");
+		}
+	});
 
 });
 </script>
@@ -31,9 +61,6 @@ $(document).ready(function(){
 
 <body>
 	<div class="container">
-		<div class="dog-gallery">
-			
-		</div>
 		<div class="dog-gallery-navigation">
 			<a class="previous-dog-image">
 				<i class="fas fa-dog"></i>
@@ -45,6 +72,10 @@ $(document).ready(function(){
 				<i class="fas fa-angle-double-right"></i>
 			</a>
 		</div>
+		<div class="dog-gallery">
+			
+		</div>
+		
 	</div>
   
 </body>
