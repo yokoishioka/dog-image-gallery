@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Asana | San Francisco Pet Adoption Agency</title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="assets/styles/site.css">
 <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -15,7 +16,7 @@ $(document).ready(function(){
 	
     $.getJSON( "assets/data/dogs.json", function( data ) {
 		$.each( data.dogs, function( key, val ) {
-			items.push("<img class='dog-image' src='/dog-image-gallery/" + val.image + "'>");
+			items.push("<div class='dog-image'><img class='dog-image' src='/dog-image-gallery/" + val.image + "' alt='asana: san francisco pet adoption agency'></div>");
 		});
 		for (i = 0; i < items.length; i++) {
 			str = str + items[i];
@@ -23,6 +24,7 @@ $(document).ready(function(){
 		}
 		$('.dog-gallery').html(str);
 	});	
+
 });
 </script>
 </head>
@@ -30,6 +32,18 @@ $(document).ready(function(){
 <body>
 	<div class="container">
 		<div class="dog-gallery">
+			
+		</div>
+		<div class="dog-gallery-navigation">
+			<a class="previous-dog-image">
+				<i class="fas fa-dog"></i>
+				<i class="fas fa-angle-double-left"></i>
+			</a>
+
+			<a class="next-dog-image">
+				<i class="fas fa-dog"></i>
+				<i class="fas fa-angle-double-right"></i>
+			</a>
 		</div>
 	</div>
   

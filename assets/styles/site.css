@@ -4,6 +4,7 @@
   --font-serif: Georgia, serif;
   --color-secondary: #333;
   --color-link: #635ac7;
+  --color-link-hover: blueviolet;
 
   font-family: var(--font-sans);
   font-weight: normal;
@@ -17,7 +18,10 @@ body {
 a {
   color: var(--color-link);
 }
-
+a:hover {
+  cursor:pointer;
+  color: var(--color-link-hover);
+}
 /* Snippets */
 .site-header {
   padding-bottom: 2rem;
@@ -37,4 +41,28 @@ a {
   color: var(--color);
   font-family: var(--font-serif);
   text-align: center;
+}
+.dog-gallery{
+  display:flex;
+  flex-wrap:wrap;
+
+}
+.dog-image {
+  width:60%;
+}
+.dog-gallery-navigation {
+  margin:1.0em;
+  max-width:33%;
+
+}
+.dog-gallery-navigation a.previous-dog-image {
+  float:left;
+}
+.dog-gallery-navigation a.next-dog-image{
+ float:right;
+}
+.dog-gallery-navigation a i{
+  display:block;
+  font-size:170%;
+
 }
