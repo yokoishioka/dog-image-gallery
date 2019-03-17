@@ -18,7 +18,7 @@ $(document).ready(function(){
 	// get images from the feed into the gallery
     $.getJSON( "assets/data/dogs.json", function( data ) {
 		$.each( data.dogs, function( key, val ) {
-			items.push("<div class='dog-image'><img src='/dog-image-gallery/" + val.image + "' alt='asana: san francisco pet adoption agency'></div>");
+			items.push("<div class='dog-image' id='" + key + "'><img src='/dog-image-gallery/" + val.image + "' alt='asana: san francisco pet adoption agency'></div>");
 		});
 		
 		galleryLength = items.length;
@@ -40,7 +40,7 @@ $(document).ready(function(){
 	// dog image gallery - previous and next navigation buttons	
 	$('a.previous-dog-image').addClass("disabled");
 	
-	
+	/*
 	$('a.previous-dog-image').click(function(){
 		
 		if (!$(this).hasClass("disabled")) {
@@ -48,8 +48,7 @@ $(document).ready(function(){
 			if (thisIndex < 1) {
 				$(this).addClass("disabled");
 			}
-			str = items[thisIndex];
-			$('.dog-gallery').html(str);
+			$(".dog-gallery").html(items[thisIndex]);
 			$(".dog-image-counter").html((thisIndex + 1) + " / " + galleryLength);
 		}
 		if ($("a.next-dog-image").hasClass("disabled")) {
@@ -65,13 +64,51 @@ $(document).ready(function(){
 		}
 		if (thisIndex < galleryLength - 1) { 	
 			thisIndex++;		
-			str = items[thisIndex];
-			$('.dog-gallery').html(str);
+
+			$(".dog-gallery").html(items[thisIndex]);
 			$(".dog-image-counter").html((thisIndex + 1) + " / " + galleryLength);
 		}
 
 	});
-	
+	*/
+	$('a.previous-dog-image').click(function(){
+		if (thisIndex == 1) {
+			$(this).addClass("disabled");
+		}
+		if (thisIndex > 0) {
+			thisIndex--;
+			$(".dog-gallery").html(items[thisIndex]);
+			$(".dog-image-counter").html((thisIndex + 1) + " / " + galleryLength);
+			$("a.next-dog-image").removeClass("disabled");
+		}
+		
+	});
+	$('a.next-dog-image').click(function(){
+		if (thisIndex == galleryLength - 2) {
+			$(this).addClass("disabled");
+		}
+		if (thisIndex < galleryLength - 1) {
+			thisIndex++;		
+			$(".dog-gallery").html(items[thisIndex]);
+			$(".dog-image-counter").html((thisIndex + 1) + " / " + galleryLength);
+			$("a.previous-dog-image").removeClass("disabled");
+		}
+
+	});
+	$(document).on("click", ".dog-gallery-thumbnail .dog-image", function(){
+		$("a.next-dog-image, a.previous-dog-image").removeClass("disabled");
+		if (this.id == 0) {
+			$("a.previous-dog-image").addClass("disabled");
+		}
+		else if (this.id == galleryLength - 1) {
+			$("a.next-dog-image").addClass("disabled");
+		}
+		$(".dog-gallery").html(items[this.id]);
+		thisIndex = parseInt(this.id);
+		$(".dog-image-counter").html((thisIndex + 1) + " / " + galleryLength);
+
+	});
+
 
 });
 </script>

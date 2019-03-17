@@ -51,7 +51,7 @@ a:hover {
 .container {
   display:flex;
   margin:2.0em auto;
-  width:80%;
+  width:50%;
 }
 
 /* Dog image gallery slideshow */
@@ -82,4 +82,7 @@ a:hover {
 	margin-top:4.4em;
 	display:block;
 	clear:left;
+}
+.dog-gallery-thumbnail .dog-image:hover {
+	cursor: pointer;
 }
