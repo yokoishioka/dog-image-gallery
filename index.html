@@ -18,19 +18,26 @@ $(document).ready(function(){
 	// get images from the feed into the gallery
     $.getJSON( "assets/data/dogs.json", function( data ) {
 		$.each( data.dogs, function( key, val ) {
-			items.push("<div class='dog-image'><img class='dog-image' src='/dog-image-gallery/" + val.image + "' alt='asana: san francisco pet adoption agency'></div>");
+			items.push("<div class='dog-image'><img src='/dog-image-gallery/" + val.image + "' alt='asana: san francisco pet adoption agency'></div>");
 		});
 		
-		// put first image into the gallery
-		$('.dog-gallery').html(items[0]);
 		galleryLength = items.length;
+		
+		// put first image into the gallery
+		$(".dog-gallery").html(items[0]);
+		
 		
 		// add image counter
 		$(".dog-image-counter").html((thisIndex + 1) + " / " + galleryLength);
+		
+		// put images into the thumbnail 
+		for (i = 0; i < galleryLength; i++) {
+			$(".dog-gallery-thumbnail").append(items[i]);
+		}
+		
 	});	
 	
-	// dog image gallery - previous and next navigation buttons
-	
+	// dog image gallery - previous and next navigation buttons	
 	$('a.previous-dog-image').addClass("disabled");
 	
 	
@@ -89,6 +96,8 @@ $(document).ready(function(){
 			
 			<div class="dog-gallery">
 			</div>
+		</div>
+		<div class="dog-gallery-thumbnail">
 		</div>
 	</div>
   

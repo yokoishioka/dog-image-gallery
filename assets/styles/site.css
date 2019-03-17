@@ -57,7 +57,6 @@ a:hover {
 /* Dog image gallery slideshow */
 .dog-gallery-navigation {
 	display:flex;
-	position:fixed;
 }
 .dog-gallery-navigation a i{
   display:block;
@@ -71,11 +70,16 @@ a:hover {
 	color:var(--color-secondary);
 }
 .dog-gallery {
-	margin-top:4.0em;
+	margin-top:1.0em;
 }
-.dog-image {
+.dog-image img{
 	width:100%;
 	border-radius:10px;
 }
-
-
+.dog-gallery-thumbnail {
+	width:70%;
+	margin-left:2.0em;
+	margin-top:4.4em;
+	display:block;
+	clear:left;
+}
