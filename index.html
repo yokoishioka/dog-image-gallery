@@ -12,7 +12,6 @@
 <script>
 $(document).ready(function(){
 	var items = [];
-	var str = '';
 	var thisIndex = 0;
 	var galleryLength;
 	
@@ -23,8 +22,7 @@ $(document).ready(function(){
 		});
 		
 		// put first image into the gallery
-		str = items[thisIndex];
-		$('.dog-gallery').html(str);
+		$('.dog-gallery').html(items[0]);
 		galleryLength = items.length;
 		
 		// add image counter
@@ -74,23 +72,24 @@ $(document).ready(function(){
 
 <body>
 	<div class="container">
-		<div class="dog-image-counter">
-		</div>
-		<div class="dog-gallery-navigation">
-			<a class="previous-dog-image">
-				<i class="fas fa-dog"></i>
-				<i class="fas fa-angle-double-left"></i>
-			</a>
-
-			<a class="next-dog-image">
-				<i class="fas fa-dog"></i>
-				<i class="fas fa-angle-double-right"></i>
-			</a>
-		</div>
-		<div class="dog-gallery">
+		<div class="dog-gallery-slideshow">
 			
+			<div class="dog-gallery-navigation">
+				<a class="previous-dog-image">
+					<i class="fas fa-dog"></i>
+					<i class="fas fa-angle-double-left"></i>
+				</a>
+				<div class="dog-image-counter">
+				</div>
+				<a class="next-dog-image">
+					<i class="fas fa-dog"></i>
+					<i class="fas fa-angle-double-right"></i>
+				</a>
+			</div>
+			
+			<div class="dog-gallery">
+			</div>
 		</div>
-		
 	</div>
   
 </body>

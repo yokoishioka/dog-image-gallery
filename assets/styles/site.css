@@ -2,7 +2,7 @@
 :root {
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-serif: Georgia, serif;
-  --color-secondary: #333;
+  --color-secondary: #444;
   --color-link: #635ac7;
   --color-link-hover: blueviolet;
 
@@ -55,38 +55,27 @@ a:hover {
 }
 
 /* Dog image gallery slideshow */
-.dog-image-counter {
-	text-align: center;
-}
-.dog-gallery{
-  display:flex;
-  flex-wrap:wrap;
-}
-.dog-image {
-  width:100%;
-  margin:1.0em;
-	border-radius:10px;
-}
 .dog-gallery-navigation {
-	margin: 0 auto;
-}
-.dog-gallery-navigation a.previous-dog-image {
-  float:left;
-}
-.dog-gallery-navigation a.next-dog-image{
- float:right;
- margin-left:2.0em;
+	display:flex;
+	position:fixed;
 }
 .dog-gallery-navigation a i{
   display:block;
   font-size:170%;
 }
+.dog-image-counter {
+	text-align: center;
+	margin-left: 2.0em;
+	margin-right: 2.0em;
+	margin-top: 1.7em;
+	color:var(--color-secondary);
+}
+.dog-gallery {
+	margin-top:4.0em;
+}
+.dog-image {
+	width:100%;
+	border-radius:10px;
+}
 
-/* Dog image thumbnail gallery */
-.dog-gallery-thumb {
-	width:50%;
-	margin-left:1.0em;
-}
-.dog-gallery-thumb img {
-	border-radius:5px;
-}
+
