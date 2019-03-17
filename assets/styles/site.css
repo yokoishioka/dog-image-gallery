@@ -22,6 +22,12 @@ a:hover {
   cursor:pointer;
   color: var(--color-link-hover);
 }
+.disabled {
+	opacity:0.5;
+}
+.disabled:hover {
+	cursor: not-allowed;
+}
 /* Snippets */
 .site-header {
   padding-bottom: 2rem;
@@ -43,23 +49,26 @@ a:hover {
   text-align: center;
 }
 .container {
-  width:50%;
+  display:flex;
   margin:2.0em auto;
+  width:80%;
+}
+
+/* Dog image gallery slideshow */
+.dog-image-counter {
+	text-align: center;
 }
 .dog-gallery{
   display:flex;
   flex-wrap:wrap;
- 
 }
 .dog-image {
   width:100%;
   margin:1.0em;
+	border-radius:10px;
 }
 .dog-gallery-navigation {
-
-margin: 0 auto;
-
-
+	margin: 0 auto;
 }
 .dog-gallery-navigation a.previous-dog-image {
   float:left;
@@ -71,5 +80,13 @@ margin: 0 auto;
 .dog-gallery-navigation a i{
   display:block;
   font-size:170%;
+}
 
+/* Dog image thumbnail gallery */
+.dog-gallery-thumb {
+	width:50%;
+	margin-left:1.0em;
+}
+.dog-gallery-thumb img {
+	border-radius:5px;
 }

@@ -16,44 +16,57 @@ $(document).ready(function(){
 	var thisIndex = 0;
 	var galleryLength;
 	
+	// get images from the feed into the gallery
     $.getJSON( "assets/data/dogs.json", function( data ) {
 		$.each( data.dogs, function( key, val ) {
 			items.push("<div class='dog-image'><img class='dog-image' src='/dog-image-gallery/" + val.image + "' alt='asana: san francisco pet adoption agency'></div>");
 		});
-		str = items[thisIndex];
-		/*
-		for (i = 0; i < items.length; i++) {
-			str = str + items[i];
 		
-		}
-		*/
+		// put first image into the gallery
+		str = items[thisIndex];
 		$('.dog-gallery').html(str);
 		galleryLength = items.length;
 		
+		// add image counter
+		$(".dog-image-counter").html((thisIndex + 1) + " / " + galleryLength);
 	});	
+	
+	// dog image gallery - previous and next navigation buttons
+	
+	$('a.previous-dog-image').addClass("disabled");
+	
+	
 	$('a.previous-dog-image').click(function(){
 		
-		if (thisIndex == 1) { 
+		if (!$(this).hasClass("disabled")) {
 			thisIndex--;
+			if (thisIndex < 1) {
+				$(this).addClass("disabled");
+			}
 			str = items[thisIndex];
 			$('.dog-gallery').html(str);
-			
+			$(".dog-image-counter").html((thisIndex + 1) + " / " + galleryLength);
 		}
-		else {
-			$(this).css("opacity", "0.5");
+		if ($("a.next-dog-image").hasClass("disabled")) {
+			$("a.next-dog-image").removeClass("disabled");
 		}
 	});
 	$('a.next-dog-image').click(function(){
-		
-		if (thisIndex < galleryLength - 1) { 
-			thisIndex++;
+		if (thisIndex == 0) {
+			$('a.previous-dog-image').removeClass("disabled");
+		}
+		if (thisIndex == galleryLength - 2) {
+			$(this).addClass("disabled");
+		}
+		if (thisIndex < galleryLength - 1) { 	
+			thisIndex++;		
 			str = items[thisIndex];
 			$('.dog-gallery').html(str);
+			$(".dog-image-counter").html((thisIndex + 1) + " / " + galleryLength);
 		}
-		else {
-			$(this).css("opacity", "0.5");
-		}
+
 	});
+	
 
 });
 </script>
@@ -61,6 +74,8 @@ $(document).ready(function(){
 
 <body>
 	<div class="container">
+		<div class="dog-image-counter">
+		</div>
 		<div class="dog-gallery-navigation">
 			<a class="previous-dog-image">
 				<i class="fas fa-dog"></i>
