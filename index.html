@@ -35,7 +35,36 @@ $(document).ready(function(){
 		
 	});	
 	
-	
+	// dog image thumbnail gallery - show previous or next set of thumbnails
+	$("a.previous-dog-image-set").addClass("disabled");
+	$("a.previous-dog-image-set").click(function(){
+		$("a.next-dog-image-set").removeClass("disabled");
+		if (thisIndex >= thumbnailLimit) {
+			$(".dog-gallery-thumbnail").html("");
+			for (i = thisIndex - thumbnailLimit; i < thisIndex; i++) {
+				$(".dog-gallery-thumbnail").append(items[i]);
+			}
+			thisIndex = thisIndex - thumbnailLimit;
+			if (thisIndex == 0) {
+				$(this).addClass("disabled");
+			}
+		}
+	});
+	$("a.next-dog-image-set").click(function(){
+		$("a.previous-dog-image-set").removeClass("disabled");
+		if (thisIndex < galleryLength - thumbnailLimit ) {
+			
+			$(".dog-gallery-thumbnail").html("");
+			for (i = thisIndex + thumbnailLimit; i < thisIndex + thumbnailLimit + thumbnailLimit; i++) {
+				$(".dog-gallery-thumbnail").append(items[i]);
+			}
+			thisIndex = thisIndex + thumbnailLimit;
+			if (thisIndex == (galleryLength - thumbnailLimit)) {
+				$(this).addClass("disabled");
+			}
+		}
+		
+	});
 	
 	// dog image gallery - previous and next navigation buttons	
 	$('a.previous-dog-image').addClass("disabled");
@@ -138,7 +167,11 @@ $(document).ready(function(){
 
 <body>
 	<div class="container">
-		<div class="dog-gallery-thumbnail">
+		<div class="dog-gallery-thumbnail-all">
+			<a class="dog-gallery-thumbnail-nav previous-dog-image-set"><i class="fas fa-angle-double-left"></i></a>
+			<div class="dog-gallery-thumbnail">
+			</div>
+			<a class="dog-gallery-thumbnail-nav next-dog-image-set"><i class="fas fa-angle-double-right"></i></a>
 		</div>
 		
 		
