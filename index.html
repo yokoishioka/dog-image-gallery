@@ -26,7 +26,6 @@ $(document).ready(function(){
 		// put first image into the gallery
 		$(".dog-gallery").html(items[0]);
 		
-		
 		// add image counter
 		$(".dog-image-counter").html((thisIndex + 1) + " / " + galleryLength);
 		
@@ -34,49 +33,27 @@ $(document).ready(function(){
 		for (i = 0; i < galleryLength; i++) {
 			$(".dog-gallery-thumbnail").append(items[i]);
 		}
-		
+		// put border around active image
+		$(".dog-gallery-thumbnail #0.dog-image img").addClass("active");
 	});	
+	
+	
 	
 	// dog image gallery - previous and next navigation buttons	
 	$('a.previous-dog-image').addClass("disabled");
 	
-	/*
 	$('a.previous-dog-image').click(function(){
 		
-		if (!$(this).hasClass("disabled")) {
-			thisIndex--;
-			if (thisIndex < 1) {
-				$(this).addClass("disabled");
-			}
-			$(".dog-gallery").html(items[thisIndex]);
-			$(".dog-image-counter").html((thisIndex + 1) + " / " + galleryLength);
-		}
-		if ($("a.next-dog-image").hasClass("disabled")) {
-			$("a.next-dog-image").removeClass("disabled");
-		}
-	});
-	$('a.next-dog-image').click(function(){
-		if (thisIndex == 0) {
-			$('a.previous-dog-image').removeClass("disabled");
-		}
-		if (thisIndex == galleryLength - 2) {
-			$(this).addClass("disabled");
-		}
-		if (thisIndex < galleryLength - 1) { 	
-			thisIndex++;		
-
-			$(".dog-gallery").html(items[thisIndex]);
-			$(".dog-image-counter").html((thisIndex + 1) + " / " + galleryLength);
-		}
-
-	});
-	*/
-	$('a.previous-dog-image').click(function(){
 		if (thisIndex == 1) {
 			$(this).addClass("disabled");
 		}
 		if (thisIndex > 0) {
 			thisIndex--;
+			// change border around thumbnail image to active
+			$(".dog-gallery-thumbnail #" + (thisIndex + 1) + ".dog-image img").removeClass("active");
+			$(".dog-gallery-thumbnail #" + thisIndex + ".dog-image img").addClass("active");
+			
+			// get previous image to put into slideshow
 			$(".dog-gallery").html(items[thisIndex]);
 			$(".dog-image-counter").html((thisIndex + 1) + " / " + galleryLength);
 			$("a.next-dog-image").removeClass("disabled");
@@ -88,14 +65,28 @@ $(document).ready(function(){
 			$(this).addClass("disabled");
 		}
 		if (thisIndex < galleryLength - 1) {
-			thisIndex++;		
+			thisIndex++;
+			
+			// change border around thumbnail image to active
+			$(".dog-gallery-thumbnail #" + (thisIndex - 1) + ".dog-image img").removeClass("active");
+			$(".dog-gallery-thumbnail #" + thisIndex + ".dog-image img").addClass("active");
+			
+			// get next image to put into slideshow
 			$(".dog-gallery").html(items[thisIndex]);
 			$(".dog-image-counter").html((thisIndex + 1) + " / " + galleryLength);
 			$("a.previous-dog-image").removeClass("disabled");
 		}
 
 	});
+	// dog image thumbnail gallery - send thumbnail to slideshow gallery
 	$(document).on("click", ".dog-gallery-thumbnail .dog-image", function(){
+		
+		$(".dog-gallery-thumbnail .dog-image img").each(function(){
+			$(this).removeClass("active");
+		});
+		$(".dog-gallery-thumbnail #" + this.id + ".dog-image img").addClass("active");
+		
+		// make sure navigation is disabled if user can't progress in slideshow
 		$("a.next-dog-image, a.previous-dog-image").removeClass("disabled");
 		if (this.id == 0) {
 			$("a.previous-dog-image").addClass("disabled");
@@ -103,10 +94,12 @@ $(document).ready(function(){
 		else if (this.id == galleryLength - 1) {
 			$("a.next-dog-image").addClass("disabled");
 		}
+		
+		// change slideshow image to selected thumbnail
 		$(".dog-gallery").html(items[this.id]);
 		thisIndex = parseInt(this.id);
 		$(".dog-image-counter").html((thisIndex + 1) + " / " + galleryLength);
-
+		
 	});
 
 

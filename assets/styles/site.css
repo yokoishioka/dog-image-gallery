@@ -28,6 +28,9 @@ a:hover {
 .disabled:hover {
 	cursor: not-allowed;
 }
+.active {
+	border:2px solid tomato;
+}
 /* Snippets */
 .site-header {
   padding-bottom: 2rem;
@@ -74,7 +77,7 @@ a:hover {
 }
 .dog-image img{
 	width:100%;
-	border-radius:10px;
+	border-radius:5px;
 }
 .dog-gallery-thumbnail {
 	width:70%;
@@ -83,6 +86,7 @@ a:hover {
 	display:block;
 	clear:left;
 }
+
 .dog-gallery-thumbnail .dog-image:hover {
 	cursor: pointer;
 }
