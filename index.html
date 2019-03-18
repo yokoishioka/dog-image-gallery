@@ -70,6 +70,12 @@ $(document).ready(function(){
 	$('a.previous-dog-image').addClass("disabled");
 	
 	$('a.previous-dog-image').click(function(){
+		if (thisIndex < galleryLength - thumbnailLimit + 1) {
+			$("a.next-dog-image-set").removeClass("disabled");
+		}
+		if (thisIndex < thumbnailLimit + 1) {
+			$("a.previous-dog-image-set").addClass("disabled");
+		}
 		
 		if (thisIndex == 1) {
 			$(this).addClass("disabled");
@@ -101,7 +107,12 @@ $(document).ready(function(){
 	});
 	$('a.next-dog-image').click(function(){
 
-		
+		if (thisIndex >= thumbnailLimit - 1) {
+			$("a.previous-dog-image-set").removeClass("disabled");
+		}
+		if (thisIndex > galleryLength - thumbnailLimit - 2) {
+			$("a.next-dog-image-set").addClass("disabled");
+		}
 		if (thisIndex == galleryLength - 2) {
 			$(this).addClass("disabled");
 		}
