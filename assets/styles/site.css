@@ -57,6 +57,9 @@ a:hover {
 }
 
 /* Dog image gallery slideshow */
+.close-me {
+	float:right;
+}
 .dog-gallery-navigation {
 	display:flex;
 }

@@ -101,7 +101,7 @@ $(document).ready(function(){
 	});
 	// dog image thumbnail gallery - send thumbnail to slideshow gallery
 	$(document).on("click", ".dog-gallery-thumbnail .dog-image", function(){
-		
+		$(".dog-gallery-slideshow").show();
 		$(".dog-gallery-thumbnail .dog-image img").each(function(){
 			$(this).removeClass("active");
 		});
@@ -123,6 +123,10 @@ $(document).ready(function(){
 		
 	});
 
+	// close slideshow 
+	$(".close-me").click(function(){
+		$(this).parent().hide();
+	});
 
 });
 </script>
@@ -144,8 +148,12 @@ $(document).ready(function(){
 		</div>
 		<div class="dog-gallery-thumbnail">
 		</div>
-		<div class="dog-gallery-slideshow">		
+		<div class="dog-gallery-slideshow">	
+		
+			<a class="close-me" title="Close Slideshow"><i class="far fa-times-circle"></i></a>
+		
 			<div class="dog-gallery">
+				
 			</div>
 		</div>
 		
