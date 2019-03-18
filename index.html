@@ -13,6 +13,7 @@
 $(document).ready(function(){
 	var items = [];
 	var thisIndex = 0;
+	var thisIndexThumb = 0;
 	var galleryLength;
 	var thumbnailLimit = 5;
 	
@@ -39,33 +40,34 @@ $(document).ready(function(){
 	$("a.previous-dog-image-set").addClass("disabled");
 	$("a.previous-dog-image-set").click(function(){
 		$("a.next-dog-image-set").removeClass("disabled");
-		if (thisIndex > thumbnailLimit - 1) {
+		if ((thisIndexThumb + thumbnailLimit) % thumbnailLimit == 0 && (thisIndexThumb > 0)) {
 			$(".dog-gallery-thumbnail").html("");
-			for (i = thisIndex - thumbnailLimit; i < thisIndex; i++) {
+			for (i = thisIndexThumb - thumbnailLimit; i < thisIndexThumb; i++) {
 				$(".dog-gallery-thumbnail").append(items[i]);
 			}
-			thisIndex = thisIndex - thumbnailLimit;
-			if (thisIndex == 0) {
+			thisIndexThumb = thisIndexThumb - thumbnailLimit;
+			console.log(thisIndexThumb);
+			if (thisIndexThumb == 0) {
 				$(this).addClass("disabled");
 			}
 		}
 	});
 	$("a.next-dog-image-set").click(function(){
 		$("a.previous-dog-image-set").removeClass("disabled");
-		if (thisIndex < galleryLength - thumbnailLimit ) {
-			
+		if ((thisIndexThumb + thumbnailLimit) % thumbnailLimit == 0 && (thisIndexThumb < galleryLength - thumbnailLimit)) {
+			console.log(thisIndexThumb + thumbnailLimit);
 			$(".dog-gallery-thumbnail").html("");
-			for (i = thisIndex + thumbnailLimit; i < thisIndex + thumbnailLimit + thumbnailLimit; i++) {
+			for (i = thisIndexThumb + thumbnailLimit; i < thisIndexThumb + thumbnailLimit + thumbnailLimit; i++) {
 				$(".dog-gallery-thumbnail").append(items[i]);
 			}
-			thisIndex = thisIndex + thumbnailLimit;
-			if (thisIndex == (galleryLength - thumbnailLimit)) {
+			thisIndexThumb = thisIndexThumb + thumbnailLimit;
+			
+			if (thisIndexThumb == galleryLength - thumbnailLimit) {
 				$(this).addClass("disabled");
 			}
-		}
-		
+		}	
 	});
-	
+
 	// dog image gallery - previous and next navigation buttons	
 	$('a.previous-dog-image').addClass("disabled");
 	
