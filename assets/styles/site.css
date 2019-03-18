@@ -60,6 +60,9 @@ a:hover {
 .close-me {
 	float:right;
 }
+.dog-gallery-slideshow {
+	display: none;
+}
 .dog-gallery-navigation {
 	display:flex;
 }
@@ -80,6 +83,13 @@ a:hover {
 .dog-image img{
 	width:100%;
 	border-radius:5px;
+}
+.dog-gallery-thumbnail-all {
+	display:flex;
+}
+.dog-gallery-thumbnail-nav {
+	font-size:170%;
+	margin-top:1.0em;
 }
 .dog-gallery-thumbnail {
 	margin-top:1.0em;

@@ -24,8 +24,6 @@ $(document).ready(function(){
 		
 		galleryLength = items.length;
 		
-		// put first image into the gallery
-		$(".dog-gallery").html(items[0]);
 		
 		// add image counter
 		$(".dog-image-counter").html((thisIndex + 1) + " / " + galleryLength);
@@ -34,8 +32,7 @@ $(document).ready(function(){
 		for (i = 0; i < thumbnailLimit; i++) {
 			$(".dog-gallery-thumbnail").append(items[i]);
 		}
-		// put border around active image
-		$(".dog-gallery-thumbnail #0.dog-image img").addClass("active");
+		
 	});	
 	
 	
@@ -55,7 +52,7 @@ $(document).ready(function(){
 			// update thumbnail gallery with previous thumbnailLimit images
 			if ((thisIndex + 2) % thumbnailLimit == 1) {
 				$(".dog-gallery-thumbnail").html("");
-				for (i = thisIndex - thumbnailLimit - 1; i < thisIndex  + 1; i++) {
+				for (i = thisIndex - thumbnailLimit - 1; i < thisIndex + 1; i++) {
 					$(".dog-gallery-thumbnail").append(items[i]);
 				}
 				
@@ -102,9 +99,8 @@ $(document).ready(function(){
 	// dog image thumbnail gallery - send thumbnail to slideshow gallery
 	$(document).on("click", ".dog-gallery-thumbnail .dog-image", function(){
 		$(".dog-gallery-slideshow").show();
-		$(".dog-gallery-thumbnail .dog-image img").each(function(){
-			$(this).removeClass("active");
-		});
+		
+		hideBorder();
 		$(".dog-gallery-thumbnail #" + this.id + ".dog-image img").addClass("active");
 		
 		// make sure navigation is disabled if user can't progress in slideshow
@@ -126,7 +122,15 @@ $(document).ready(function(){
 	// close slideshow 
 	$(".close-me").click(function(){
 		$(this).parent().hide();
+		hideBorder();
 	});
+	
+	// remove border from thumbnail img
+	function hideBorder() {
+		$(".dog-gallery-thumbnail .dog-image img").each(function(){
+			$(this).removeClass("active");
+		});
+	}
 
 });
 </script>
@@ -134,23 +138,26 @@ $(document).ready(function(){
 
 <body>
 	<div class="container">
-		<div class="dog-gallery-navigation">
-			<a class="previous-dog-image">
-				<i class="fas fa-dog"></i>
-				<i class="fas fa-angle-double-left"></i>
-			</a>
-			<div class="dog-image-counter">
-			</div>
-			<a class="next-dog-image">
-				<i class="fas fa-dog"></i>
-				<i class="fas fa-angle-double-right"></i>
-			</a>
-		</div>
 		<div class="dog-gallery-thumbnail">
 		</div>
-		<div class="dog-gallery-slideshow">	
 		
+		
+		<div class="dog-gallery-slideshow">	
+			<div class="dog-gallery-navigation">
+				<a class="previous-dog-image">
+					<i class="fas fa-dog"></i>
+					<i class="fas fa-angle-double-left"></i>
+				</a>
+				<div class="dog-image-counter">
+				</div>
+				<a class="next-dog-image">
+					<i class="fas fa-dog"></i>
+					<i class="fas fa-angle-double-right"></i>
+				</a>
+			
+			</div>
 			<a class="close-me" title="Close Slideshow"><i class="far fa-times-circle"></i></a>
+			
 		
 			<div class="dog-gallery">
 				
