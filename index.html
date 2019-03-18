@@ -14,6 +14,7 @@ $(document).ready(function(){
 	var items = [];
 	var thisIndex = 0;
 	var galleryLength;
+	var thumbnailLimit = 5;
 	
 	// get images from the feed into the gallery
     $.getJSON( "assets/data/dogs.json", function( data ) {
@@ -30,7 +31,7 @@ $(document).ready(function(){
 		$(".dog-image-counter").html((thisIndex + 1) + " / " + galleryLength);
 		
 		// put images into the thumbnail 
-		for (i = 0; i < galleryLength; i++) {
+		for (i = 0; i < thumbnailLimit; i++) {
 			$(".dog-gallery-thumbnail").append(items[i]);
 		}
 		// put border around active image
@@ -48,7 +49,19 @@ $(document).ready(function(){
 			$(this).addClass("disabled");
 		}
 		if (thisIndex > 0) {
+			
 			thisIndex--;
+			
+			// update thumbnail gallery with previous thumbnailLimit images
+			if ((thisIndex + 2) % thumbnailLimit == 1) {
+				$(".dog-gallery-thumbnail").html("");
+				for (i = thisIndex - thumbnailLimit - 1; i < thisIndex  + 1; i++) {
+					$(".dog-gallery-thumbnail").append(items[i]);
+				}
+				
+				console.log(thisIndex);	
+			}
+					
 			// change border around thumbnail image to active
 			$(".dog-gallery-thumbnail #" + (thisIndex + 1) + ".dog-image img").removeClass("active");
 			$(".dog-gallery-thumbnail #" + thisIndex + ".dog-image img").addClass("active");
@@ -61,12 +74,20 @@ $(document).ready(function(){
 		
 	});
 	$('a.next-dog-image').click(function(){
+
+		
 		if (thisIndex == galleryLength - 2) {
 			$(this).addClass("disabled");
 		}
 		if (thisIndex < galleryLength - 1) {
 			thisIndex++;
-			
+			// update thumbnail gallery with next thumbnailLimit images
+			if ((thisIndex + 1) % thumbnailLimit == 1) {
+				$(".dog-gallery-thumbnail").html("");
+				for (i = thisIndex; i < (thumbnailLimit + thisIndex); i++) {
+					$(".dog-gallery-thumbnail").append(items[i]);
+				}
+			}
 			// change border around thumbnail image to active
 			$(".dog-gallery-thumbnail #" + (thisIndex - 1) + ".dog-image img").removeClass("active");
 			$(".dog-gallery-thumbnail #" + thisIndex + ".dog-image img").addClass("active");
@@ -109,26 +130,25 @@ $(document).ready(function(){
 
 <body>
 	<div class="container">
-		<div class="dog-gallery-slideshow">
-			
-			<div class="dog-gallery-navigation">
-				<a class="previous-dog-image">
-					<i class="fas fa-dog"></i>
-					<i class="fas fa-angle-double-left"></i>
-				</a>
-				<div class="dog-image-counter">
-				</div>
-				<a class="next-dog-image">
-					<i class="fas fa-dog"></i>
-					<i class="fas fa-angle-double-right"></i>
-				</a>
+		<div class="dog-gallery-navigation">
+			<a class="previous-dog-image">
+				<i class="fas fa-dog"></i>
+				<i class="fas fa-angle-double-left"></i>
+			</a>
+			<div class="dog-image-counter">
 			</div>
-			
-			<div class="dog-gallery">
-			</div>
+			<a class="next-dog-image">
+				<i class="fas fa-dog"></i>
+				<i class="fas fa-angle-double-right"></i>
+			</a>
 		</div>
 		<div class="dog-gallery-thumbnail">
 		</div>
+		<div class="dog-gallery-slideshow">		
+			<div class="dog-gallery">
+			</div>
+		</div>
+		
 	</div>
   
 </body>

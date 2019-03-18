@@ -52,7 +52,6 @@ a:hover {
   text-align: center;
 }
 .container {
-  display:flex;
   margin:2.0em auto;
   width:50%;
 }
@@ -80,13 +79,15 @@ a:hover {
 	border-radius:5px;
 }
 .dog-gallery-thumbnail {
-	width:70%;
-	margin-left:2.0em;
-	margin-top:4.4em;
-	display:block;
-	clear:left;
-}
+	margin-top:1.0em;
+	margin-bottom:1.0em;
+	display:flex;
 
+}
+.dog-gallery-thumbnail .dog-image {
+	width:20%;
+	padding:0.5em;
+}
 .dog-gallery-thumbnail .dog-image:hover {
 	cursor: pointer;
 }
