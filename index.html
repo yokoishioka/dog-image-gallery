@@ -33,12 +33,12 @@ $(document).ready(function(){
 		for (i = 0; i < thumbnailLimit; i++) {
 			$(".dog-gallery-thumbnail").append(items[i]);
 		}
-		
+		$(".next-dog-image-set-counter").text(thumbnailLimit + "/" + parseInt(thumbnailLimit + thumbnailLimit));
 	});	
 	
-	// dog image thumbnail gallery - show previous or next set of thumbnails
-	$("a.previous-dog-image-set").addClass("disabled");
-	$("a.previous-dog-image-set").click(function(){
+	// dog image thumbnail gallery - show prev or next set of thumbnails
+	$("a.prev-dog-image-set").addClass("disabled");
+	$("a.prev-dog-image-set").click(function(){
 		$("a.next-dog-image-set").removeClass("disabled");
 		if ((thisIndexThumb + thumbnailLimit) % thumbnailLimit == 0 && (thisIndexThumb > 0)) {
 			$(".dog-gallery-thumbnail").html("");
@@ -46,14 +46,12 @@ $(document).ready(function(){
 				$(".dog-gallery-thumbnail").append(items[i]);
 			}
 			thisIndexThumb = thisIndexThumb - thumbnailLimit;
-			console.log(thisIndexThumb);
-			if (thisIndexThumb == 0) {
-				$(this).addClass("disabled");
-			}
+			updateThumbCounter();
+			
 		}
 	});
 	$("a.next-dog-image-set").click(function(){
-		$("a.previous-dog-image-set").removeClass("disabled");
+		$("a.prev-dog-image-set").removeClass("disabled");
 		if ((thisIndexThumb + thumbnailLimit) % thumbnailLimit == 0 && (thisIndexThumb < galleryLength - thumbnailLimit)) {
 			console.log(thisIndexThumb + thumbnailLimit);
 			$(".dog-gallery-thumbnail").html("");
@@ -62,21 +60,22 @@ $(document).ready(function(){
 			}
 			thisIndexThumb = thisIndexThumb + thumbnailLimit;
 			
-			if (thisIndexThumb == galleryLength - thumbnailLimit) {
-				$(this).addClass("disabled");
-			}
+			updateThumbCounter();
+			
+			
+			
 		}	
 	});
 
-	// dog image gallery - previous and next navigation buttons	
-	$('a.previous-dog-image').addClass("disabled");
+	// dog image gallery - prev and next navigation buttons	
+	$('a.prev-dog-image').addClass("disabled");
 	
-	$('a.previous-dog-image').click(function(){
+	$('a.prev-dog-image').click(function(){
 		if (thisIndex < galleryLength - thumbnailLimit + 1) {
 			$("a.next-dog-image-set").removeClass("disabled");
 		}
 		if (thisIndex < thumbnailLimit + 1) {
-			$("a.previous-dog-image-set").addClass("disabled");
+			$("a.prev-dog-image-set").addClass("disabled");
 		}
 		
 		if (thisIndex == 1) {
@@ -86,21 +85,21 @@ $(document).ready(function(){
 			
 			thisIndex--;
 			
-			// update thumbnail gallery with previous thumbnailLimit images
+			// update thumbnail gallery with prev thumbnailLimit images
 			if ((thisIndex + 2) % thumbnailLimit == 1) {
 				$(".dog-gallery-thumbnail").html("");
 				for (i = thisIndex - thumbnailLimit + 1; i < thisIndex + 1; i++) {
 					$(".dog-gallery-thumbnail").append(items[i]);
 				}
-				
-				console.log(thisIndex);	
+				thisIndexThumb = thisIndex - thumbnailLimit + 1;
+				updateThumbCounter();
 			}
 					
 			// change border around thumbnail image to active
 			$(".dog-gallery-thumbnail #" + (thisIndex + 1) + ".dog-image img").removeClass("active");
 			$(".dog-gallery-thumbnail #" + thisIndex + ".dog-image img").addClass("active");
 			
-			// get previous image to put into slideshow
+			// get prev image to put into slideshow
 			$(".dog-gallery").html(items[thisIndex]);
 			$(".dog-image-counter").html((thisIndex + 1) + " / " + galleryLength);
 			$("a.next-dog-image").removeClass("disabled");
@@ -110,7 +109,7 @@ $(document).ready(function(){
 	$('a.next-dog-image').click(function(){
 
 		if (thisIndex >= thumbnailLimit - 1) {
-			$("a.previous-dog-image-set").removeClass("disabled");
+			$("a.prev-dog-image-set").removeClass("disabled");
 		}
 		if (thisIndex > galleryLength - thumbnailLimit - 2) {
 			$("a.next-dog-image-set").addClass("disabled");
@@ -126,6 +125,9 @@ $(document).ready(function(){
 				for (i = thisIndex; i < (thumbnailLimit + thisIndex); i++) {
 					$(".dog-gallery-thumbnail").append(items[i]);
 				}
+				thisIndexThumb = thisIndex;
+				updateThumbCounter();
+				console.log(thisIndex);
 			}
 			// change border around thumbnail image to active
 			$(".dog-gallery-thumbnail #" + (thisIndex - 1) + ".dog-image img").removeClass("active");
@@ -134,7 +136,7 @@ $(document).ready(function(){
 			// get next image to put into slideshow
 			$(".dog-gallery").html(items[thisIndex]);
 			$(".dog-image-counter").html((thisIndex + 1) + " / " + galleryLength);
-			$("a.previous-dog-image").removeClass("disabled");
+			$("a.prev-dog-image").removeClass("disabled");
 		}
 
 	});
@@ -146,9 +148,9 @@ $(document).ready(function(){
 		$(".dog-gallery-thumbnail #" + this.id + ".dog-image img").addClass("active");
 		
 		// make sure navigation is disabled if user can't progress in slideshow
-		$("a.next-dog-image, a.previous-dog-image").removeClass("disabled");
+		$("a.next-dog-image, a.prev-dog-image").removeClass("disabled");
 		if (this.id == 0) {
-			$("a.previous-dog-image").addClass("disabled");
+			$("a.prev-dog-image").addClass("disabled");
 		}
 		else if (this.id == galleryLength - 1) {
 			$("a.next-dog-image").addClass("disabled");
@@ -173,6 +175,20 @@ $(document).ready(function(){
 			$(this).removeClass("active");
 		});
 	}
+	
+	function updateThumbCounter() {
+		
+		$(".prev-dog-image-set-counter").text(thisIndexThumb + "/" + parseInt(thisIndexThumb + thumbnailLimit));
+		$(".next-dog-image-set-counter").text(parseInt(thisIndexThumb + thumbnailLimit) + "/" + parseInt(thisIndexThumb + thumbnailLimit + thumbnailLimit));
+		if (thisIndexThumb == galleryLength - thumbnailLimit) {
+				$(".next-dog-image-set").addClass("disabled");
+				$(".next-dog-image-set-counter").text("");
+		}
+		if (thisIndexThumb == 0) {
+			$(".prev-dog-image-set-counter").text("");
+			$(".prev-dog-image-set").addClass("disabled");
+		}
+	}
 
 });
 </script>
@@ -181,16 +197,16 @@ $(document).ready(function(){
 <body>
 	<div class="container">
 		<div class="dog-gallery-thumbnail-all">
-			<a class="dog-gallery-thumbnail-nav previous-dog-image-set"><i class="fas fa-angle-double-left"></i></a>
+			<a class="dog-gallery-thumbnail-nav prev-dog-image-set"><i class="fas fa-angle-double-left"></i> <div class="prev-dog-image-set-counter dog-image-set-counter"></div></a>
 			<div class="dog-gallery-thumbnail">
 			</div>
-			<a class="dog-gallery-thumbnail-nav next-dog-image-set"><i class="fas fa-angle-double-right"></i></a>
+			<a class="dog-gallery-thumbnail-nav next-dog-image-set"><i class="fas fa-angle-double-right"></i> <div class="next-dog-image-set-counter dog-image-set-counter"></div></a>
 		</div>
 		
 		
 		<div class="dog-gallery-slideshow">	
 			<div class="dog-gallery-navigation">
-				<a class="previous-dog-image">
+				<a class="prev-dog-image">
 					<i class="fas fa-dog"></i>
 					<i class="fas fa-angle-double-left"></i>
 				</a>

@@ -104,3 +104,6 @@ a:hover {
 .dog-gallery-thumbnail .dog-image:hover {
 	cursor: pointer;
 }
+.dog-image-set-counter {
+	font-size:40%;
+}
