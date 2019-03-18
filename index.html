@@ -39,7 +39,7 @@ $(document).ready(function(){
 	$("a.previous-dog-image-set").addClass("disabled");
 	$("a.previous-dog-image-set").click(function(){
 		$("a.next-dog-image-set").removeClass("disabled");
-		if (thisIndex >= thumbnailLimit) {
+		if (thisIndex > thumbnailLimit - 1) {
 			$(".dog-gallery-thumbnail").html("");
 			for (i = thisIndex - thumbnailLimit; i < thisIndex; i++) {
 				$(".dog-gallery-thumbnail").append(items[i]);
@@ -87,7 +87,7 @@ $(document).ready(function(){
 			// update thumbnail gallery with previous thumbnailLimit images
 			if ((thisIndex + 2) % thumbnailLimit == 1) {
 				$(".dog-gallery-thumbnail").html("");
-				for (i = thisIndex - thumbnailLimit - 1; i < thisIndex + 1; i++) {
+				for (i = thisIndex - thumbnailLimit + 1; i < thisIndex + 1; i++) {
 					$(".dog-gallery-thumbnail").append(items[i]);
 				}
 				
