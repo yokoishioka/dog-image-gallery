@@ -150,6 +150,7 @@ $(document).ready(function(){
 	});
 	// dog image thumbnail gallery - send thumbnail to slideshow gallery
 	$(document).on("click", ".dog-gallery-thumbnail .dog-image", function(){
+		$(".header").hide();
 		$(".dog-gallery-slideshow").show();
 		
 		hideBorder();
@@ -174,6 +175,7 @@ $(document).ready(function(){
 	// close slideshow 
 	$(".close-me").click(function(){
 		$(this).parent().hide();
+		$(".header").show();
 		hideBorder();
 	});
 	

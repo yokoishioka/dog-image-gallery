@@ -62,9 +62,12 @@ a:hover {
 }
 .dog-gallery-slideshow {
 	display: none;
+	width:100%;
+	margin:0 auto;
 }
 .dog-gallery-navigation {
 	display:flex;
+	justify-content:center;
 }
 .dog-gallery-navigation a i{
   display:block;
