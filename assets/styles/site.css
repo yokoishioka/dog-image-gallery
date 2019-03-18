@@ -86,6 +86,7 @@ a:hover {
 }
 .dog-gallery-thumbnail-all {
 	display:flex;
+	justify-content: center;
 }
 .dog-gallery-thumbnail-nav {
 	font-size:170%;
@@ -102,7 +103,7 @@ a:hover {
 	padding:0.5em;
 }
 .dog-gallery-thumbnail .dog-image:hover {
-	cursor: pointer;
+	cursor: zoom-in;
 }
 .dog-gallery-thumbnail .dog-image img {
 	width:6.0em;

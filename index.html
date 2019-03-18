@@ -17,6 +17,14 @@ $(document).ready(function(){
 	var galleryLength;
 	var thumbnailLimit = 5;
 
+	// get header and footer
+	$.get("assets/snippets/header.html", function(data) {
+		$(".header").html(data);
+	});
+	$.get("assets/snippets/footer.html", function(data) {
+		$(".footer").html(data);
+	});
+	
 	// get images from the feed into the gallery
     $.getJSON( "assets/data/dogs.json", function( data ) {
 		$.each( data.dogs, function( key, val ) {
@@ -196,6 +204,7 @@ $(document).ready(function(){
 
 <body>
 	<div class="container">
+		<header class="header"></header>
 		<div class="dog-gallery-thumbnail-all">
 			<a class="dog-gallery-thumbnail-nav prev-dog-image-set"><i class="fas fa-angle-double-left"></i> <div class="prev-dog-image-set-counter dog-image-set-counter"></div></a>
 			<div class="dog-gallery-thumbnail">
@@ -225,6 +234,8 @@ $(document).ready(function(){
 				
 			</div>
 		</div>
+		<footer class="footer">
+		</footer>
 		
 	</div>
   
