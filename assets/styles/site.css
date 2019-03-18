@@ -53,7 +53,7 @@ a:hover {
 }
 .container {
   margin:2.0em auto;
-  width:50%;
+  width:70%;
 }
 
 /* Dog image gallery slideshow */
@@ -103,6 +103,10 @@ a:hover {
 }
 .dog-gallery-thumbnail .dog-image:hover {
 	cursor: pointer;
+}
+.dog-gallery-thumbnail .dog-image img {
+	width:6.0em;
+	height:4.0em;
 }
 .dog-image-set-counter {
 	font-size:40%;

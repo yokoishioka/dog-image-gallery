@@ -16,11 +16,11 @@ $(document).ready(function(){
 	var thisIndexThumb = 0;
 	var galleryLength;
 	var thumbnailLimit = 5;
-	
+
 	// get images from the feed into the gallery
     $.getJSON( "assets/data/dogs.json", function( data ) {
 		$.each( data.dogs, function( key, val ) {
-			items.push("<div class='dog-image' id='" + key + "'><img src='/dog-image-gallery/" + val.image + "' alt='asana: san francisco pet adoption agency'></div>");
+			items.push("<div class='dog-image' id='" + key + "'><img src='/dog-image-gallery/" + val.image + "' alt='asana: san francisco pet adoption agency' title='asana: san francisco pet adoption agency'></div>");
 		});
 		
 		galleryLength = items.length;
